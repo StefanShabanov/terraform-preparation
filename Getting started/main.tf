@@ -5,11 +5,10 @@ provider "aws" {
 
 #Starting an instance (VM)
 resource "aws_instance" "exampletf" {
-  ami           = "ami-0b9094fa2b07038b8" # Amazon Machine Image (AMI), in this case it's Amazon Linux
+  ami           = "ami-04e601abe3e1a910f" # Amazon Machine Image (AMI), in this case it's Ubuntu 20.04
   instance_type = "t2.micro"
 
   tags = {
-    Name = "terraform-example"
+    Name = "terraform-example" #naming the instance we just created
   }
-
 }
