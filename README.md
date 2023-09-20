@@ -2,6 +2,8 @@
 
 In real-world scenarios, relying on a single server can lead to a single point of failure. To fix this I deployed a cluster of servers capable of adjusting their size based on traffic fluctuations. To achieve this, I utilized the power of AWS Auto Scaling Groups (ASGs). ASGs manage the deployment of our server cluster, monitor instance health, replace failed instances, and dynamically adjust the cluster size to accommodate varying loads (ranging from 2 to 10 instances).
 
+![Alt text](https://github.com/StefanShabanov/terraform-preparation/blob/main/diagram.png)
+
 ## Key Configuration Steps:
 
 **Launch Configuration** : I defined a launch configuration using `aws_launch_configuration` to specify how each EC2 instance in the ASG should be configured.
