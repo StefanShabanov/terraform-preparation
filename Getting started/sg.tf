@@ -15,7 +15,7 @@ resource "aws_security_group" "instance" {
 #security group for the ALB
 
 resource "aws_security_group" "alb" {
-  name        = var.instance_security_group
+  name        = var.alb_security_group_name
   description = "Security group for my ALB"
 
   ingress {
