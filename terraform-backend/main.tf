@@ -2,13 +2,16 @@ provider "aws" {
     region = "eu-central-1"
 }
 
-resource "aws_s3_bucket" "stefan-terraform-state" {
-    bucket = "terraform-state"
+terraform {
+  backend "s3" {
+    bucket = "stefan-terraform-state001"
+    key = "global/s3/terraform.tfstate"
+    region = "eu-central-1"
 
-    #to prevent accidental deletion. Any attempt to delete the bucket will cause TF to exit with error.
-      lifecycle {
-      prevent_destroy = true
-    }
+    dynamodb_table = "stefan-terraform-locks"
+    encrypt = true
+    
+  }
 }
 
 #Adding versioning. Every update to a file in the bucket will create a new version of it
@@ -34,7 +37,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 #Blocking all public access to the bucket
 
 resource "aws_s3_bucket_public_access_block" "public_access" {
-    bucket = aws_s3_bucket.stefan-terraform-state
+    bucket = aws_s3_bucket.stefan-terraform-state.id
     block_public_acls = true
     block_public_policy = true
     ignore_public_acls = true
