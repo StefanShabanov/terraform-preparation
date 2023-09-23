@@ -2,6 +2,7 @@ provider "aws" {
     region = "eu-central-1"
 }
 
+#Creating the backend for the state file.
 terraform {
   backend "s3" {
     bucket = "stefan-terraform-state001"
@@ -56,3 +57,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
       type = "S"
     }
 }
+
+
+#With this first part of the code, Terraform is automatically pushing and pulling the state data to/from S3 and S3 is storing every version of the state file.
+#This is useful for debugging/rolling back to older versions of the code.
+
