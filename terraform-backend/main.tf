@@ -61,4 +61,8 @@ resource "aws_dynamodb_table" "terraform_locks" {
 
 #With this first part of the code, Terraform is automatically pushing and pulling the state data to/from S3 and S3 is storing every version of the state file.
 #This is useful for debugging/rolling back to older versions of the code.
+#To make this work, I first created a code to create an S3 bucket and deployed the code with a local backend. Then I added a remote backend configuration and ran terraform init to copy my local state to the bucket i created.
+#To delete the S3 bucket you'd have to remove the backend configuration and rerun terraform init to copy the state back to the local disk, then run terraform destroy to delete the bucket and the DynamoDB table.
+#Keep in mind that variables are not allowed in a backend configuration and you'd have to enter them manually.
+
 
